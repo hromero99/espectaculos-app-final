@@ -180,8 +180,7 @@ public class ReviewDAO implements IDAO<ReviewDTO> {
     }
 
     public void evaluateReview(int userId, int points, int review_id,int espectaculo_id) {
-        DBConnection dbCon = new DBConnection();
-        Connection con = dbCon.getConnection();
+        Connection con = this.DBConnection.getConnection();
         try {
             PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("reviewEvaluate"));
             stmnt.setInt(1,espectaculo_id);
