@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"es.uco.pw.data.dao","l":"EspectaculoDAO"}];updateSearchResults();

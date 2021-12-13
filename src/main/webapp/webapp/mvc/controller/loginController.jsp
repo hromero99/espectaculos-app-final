@@ -6,21 +6,26 @@
 
     //These strings will be used in order to indicate the next page which will be rendered and the message which the user receives on that page
     String  nextPage="/mvc/view/loginView.jsp";
-    String nextPageMessage="";
+    String  nextPageMessage="";
 
     //First case: If user is logged in we simply return him to the index
-    if(customerBean!= null){
+    
+    if(customerBean != null){
         nextPage="/index.jsp";
-        nextPageMessage="";
-    }
+    }%>
+    <jsp:forward page="<%=nextPage%>">
+    	<jsp:param value="<%=nextPageMessage%>" name="message"/>
+	</jsp:forward>
+    
+    <%
 
     //Second case: If user is not logged in
     //Here we will have two subcases: if the user exists or if it doesn't.
         String userEmail=request.getParameter("email");
         String userPassword=request.getParameter("password");
-		
         //Subcase 1: user exists but it's not logged in
         if(userEmail!=null){ //if user inputed a username
+        	
             //we store the username and call the DAO for that specific username
             String urlDB = getServletContext().getInitParameter("DBurl");
             String userDB = getServletContext().getInitParameter("DBuser");
@@ -43,7 +48,7 @@
             //we check if the username actually exists (dao must have returned something !=null)
             if(user!=null){
             	// Check the credentials
-            	if (user.getEmail().equalsIgnoreCase(userEmail) && user.getPassword().equalsIgnoreCase(userPassword)){
+            	if (user.getEmail().equalsIgnoreCase(userEmail) && user.getPassword().equals(userPassword)){
         			
             		%>
             		    <jsp:setProperty property="id" value="<%=user.getId()%>" name="customerBean" ></jsp:setProperty>   	
@@ -57,7 +62,7 @@
             		<%
             		if(user.isAdministrator()){
             			uDao.addLogDate(user.getId());
-                       	nextPage="/index.jsp";
+                       	nextPage="/dashboard.jsp";
 
                        	String returnValue = "";
                     	ArrayList<UserDTO> users = uDao.getAll();
@@ -85,7 +90,7 @@
                         	java.text.DateFormat df = new java.text.SimpleDateFormat("yyyy-MM-dd");
                         	java.util.Date current = new java.util.Date();
                         	nextPageMessage = df.format(user.getCreationDate());
-                          	nextPage="/index.jsp";
+                          	nextPage="/dashboard.jsp";
                        }
             		 //if it gets here, success, user exists. We simply redirect him with specified parameters and done
             	 %>

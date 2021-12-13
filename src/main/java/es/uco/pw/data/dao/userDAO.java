@@ -214,7 +214,7 @@ public class userDAO implements IDAO<UserDTO> {
     }
     
     public String getLastLog(int user_id) {
-    	 String userLastLog = "";
+    	 String userLastLog = "El usuario no ha accedido";
     	 DBConnection dbCon = new DBConnection(this.url, this.user, this.password);
          Connection con = dbCon.getConnection();
          try {

@@ -10,9 +10,8 @@
     </head>
 
     <body>
-    	Exception is: <%= exception %>  
-   
-        
+	Error   
+     		${sessionScope.exception}
  
     </body>
 

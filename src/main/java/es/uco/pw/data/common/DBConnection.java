@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import javax.servlet.http.HttpServlet;
 
 
 public class DBConnection{
@@ -14,6 +15,7 @@ public class DBConnection{
 
     public DBConnection() {
         try {
+        	
             FileInputStream fis=new FileInputStream("resources/config.properties");
             Properties pro=new Properties ();
             pro.load(fis);
@@ -34,6 +36,7 @@ public class DBConnection{
         this.password = password;
         this.url = url;
     }
+    
     public Connection getConnection(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
