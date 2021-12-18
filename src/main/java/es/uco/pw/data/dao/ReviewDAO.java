@@ -154,8 +154,7 @@ public class ReviewDAO implements IDAO<ReviewDTO> {
     }
     public List<ReviewDTO> getReviewForEspectaculo(int espectaculoID){
         List<ReviewDTO> reviewList = new ArrayList<ReviewDTO>();
-        DBConnection dbcon = new DBConnection();
-        Connection con = dbcon.getConnection();
+        Connection con = this.DBConnection.getConnection();
         try{
             PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("ReviewByEspectaculo"));
             stmnt.setInt(1,espectaculoID);
@@ -174,7 +173,7 @@ public class ReviewDAO implements IDAO<ReviewDTO> {
         catch (SQLException e){
             e.printStackTrace();
         }
-        dbcon.closeConnection();
+        this.DBConnection.closeConnection();
 
         return reviewList;
     }
