@@ -42,6 +42,9 @@ public class ReviewShowList extends HttpServlet {
         java.util.Properties prop = new java.util.Properties();
         prop.load(getServletContext().getResourceAsStream(file));
 		ReviewDAO rDao = new ReviewDAO(urlDB,userDB,passDB,prop);
+		
+		//Need to get the reviews for a show not for all shows
+		
 		List<ReviewDTO> reviews = rDao.getAll();
 		EspectaculoDAO eDao = new EspectaculoDAO(urlDB,userDB,passDB,prop);
 		HashMap<ReviewDTO, String> reviewList = new HashMap<ReviewDTO,String>(); 
@@ -55,7 +58,7 @@ public class ReviewShowList extends HttpServlet {
 		// Set the map inside the request
 		request.setAttribute("reviews", reviewList);
 		//Make the forward to View
-		request.getRequestDispatcher("mvc/view/reviewList.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/reviewList.jsp").forward(request, response);
 		
 	}
 

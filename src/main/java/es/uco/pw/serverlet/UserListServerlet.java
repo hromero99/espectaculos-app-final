@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.annotation.security.RolesAllowed;
 import es.uco.pw.business.dto.UserDTO;
 import es.uco.pw.data.dao.userDAO;
+import java.util.HashMap;
 
 /**
  * Servlet implementation class UserListServerlet
@@ -47,9 +48,15 @@ public class UserListServerlet extends HttpServlet {
         // Create DAO object to get the user lists
         userDAO uDao = new userDAO(urlDB,userDB,passDB,prop);
         List<UserDTO> users = uDao.getAll();
+        // The user variable has the plain user, instead need to get the last login date
+        // We need to create a hashmap to pass alse the last logging date
         
+        HashMap<UserDTO,String> userList = new HashMap<UserDTO,String>();
+        for (UserDTO it: users) {
+        	userList.put(it, uDao.getLastLog(it.getId()));
+        }
         //TODO: Replace with the html final table
-        request.setAttribute("usersList", users);   
+        request.setAttribute("usersList", userList);   
         request.getRequestDispatcher("view/admin/usersListView.jsp").forward(request, response);
 	}
 

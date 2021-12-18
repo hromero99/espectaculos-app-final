@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="es.uco.pw.business.dto.UserDTO, java.util.List"%>
+<%@ page import="es.uco.pw.business.dto.UserDTO, java.util.HashMap"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,19 +17,24 @@
 					out.print("<p>No existe ningún usuario en el sistema</p>");
 				}
 				else{
-					for (UserDTO it: (List<UserDTO>)request.getAttribute("usersList")){
+					HashMap<UserDTO,String> usersList = (HashMap<UserDTO,String>) request.getAttribute("usersList");
+					for (HashMap.Entry<UserDTO,String> it: usersList.entrySet()){
 						%><tr>
-							<td><%out.print(it.getName());%></td>
-							<td><%out.print(it.getSurnames());%></td>
-							<td><%out.print(it.getNick());%></td>
-							<td><%out.print(it.getEmail());%></td>
-							<td><%if (it.isAdministrator()){
+							<td><%out.print(it.getKey().getName());%></td>
+							<td><%out.print(it.getKey().getSurnames());%></td>
+							<td><%out.print(it.getKey().getNick());%></td>
+							<td><%out.print(it.getKey().getEmail());%></td>
+							<td><%if (it.getKey().isAdministrator()){
 								out.print("Es Administrator");
 							}else{
 								out.print("No es Administrador");
 							}
 							%></td>
-							<td><%out.print(it.getPassword());%></td>
+							<td><%out.print(it.getKey().getPassword());%></td>
+							<td><%out.print(it.getKey().getCreationDate());%></td>
+							<td><%out.print(it.getKey().getPassword());%></td>
+							<td><%out.print(it.getValue());%></td>
+							
 						</tr>
 					
 					<%}%>
