@@ -33,6 +33,12 @@ public class LoginServerlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Need to check if user is logged to redirect
+		HttpSession session = request.getSession();
+		CustomerBean bean = (CustomerBean) session.getAttribute("customerBean");
+		if (bean != null) {
+			response.sendRedirect("dashboard");
+		}
 		RequestDispatcher vHeader = request.getRequestDispatcher("header.html");
 		RequestDispatcher view = request.getRequestDispatcher("login.html");
 		vHeader.include(request, response);

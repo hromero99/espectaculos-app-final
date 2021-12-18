@@ -29,21 +29,23 @@ public class Dashboard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		CustomerBean bean = (CustomerBean) session.getAttribute("customerBean");
-		if (bean == null) {
+		if (session.getAttribute("customerBean") == null) {
 			RequestDispatcher disp = request.getRequestDispatcher("login");
 			request.setAttribute("message", "Tienes que estar autenticado para acceder a esta parte");
 			disp.forward(request,response);
+		}else {
+			// Redirect to view with all user information
+			if (bean.getAdministrator() == true) {
+				RequestDispatcher disp = request.getRequestDispatcher("dashboard/admin");
+				disp.forward(request,response);
+			}
+			// Redirect to spectator interface
+			else {
+				RequestDispatcher disp = request.getRequestDispatcher("dashboard/user");
+				disp.forward(request,response);
+			}
 		}
-		// Redirect to view with all user information
-		if (bean.getAdministrator() == true) {
-			RequestDispatcher disp = request.getRequestDispatcher("dashboard/admin");
-			disp.forward(request,response);
-		}
-		// Redirect to spectator interface
-		else {
-			RequestDispatcher disp = request.getRequestDispatcher("dashboard/user");
-			disp.forward(request,response);
-		}
+		
 	}
 
 	/**
