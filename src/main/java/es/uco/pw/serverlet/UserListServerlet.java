@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.annotation.security.RolesAllowed;
 import es.uco.pw.business.dto.UserDTO;
 import es.uco.pw.data.dao.userDAO;
 
@@ -47,22 +47,10 @@ public class UserListServerlet extends HttpServlet {
         // Create DAO object to get the user lists
         userDAO uDao = new userDAO(urlDB,userDB,passDB,prop);
         List<UserDTO> users = uDao.getAll();
+        
         //TODO: Replace with the html final table
-        PrintWriter out = response.getWriter();
-        out.println("<table>");
-        out.print("<tr>");
-    	out.println("<td> Nombre de usuario</td>");        	
-    	out.println("<td> Fecha de creación de usuario</td>");        	
-    	out.println("<td> Último acceso del usuario</td>");       
-    	out.println("</tr>");
-        for (UserDTO UserIterator: users) {
-        	out.print("<tr>");
-        	out.println("<td>"+UserIterator.getName()+"</td>");        	
-        	out.println("<td>"+UserIterator.getCreationDate()+"</td>"); 
-        	out.println("<td>"+uDao.getLastLog(UserIterator.getId())+"</td>");       
-        	out.println("</tr>");
-        }
-        out.println("</table>");        
+        request.setAttribute("usersList", users);   
+        request.getRequestDispatcher("view/admin/usersListView.jsp").forward(request, response);
 	}
 
 	/**

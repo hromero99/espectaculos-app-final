@@ -2,6 +2,7 @@ package es.uco.pw.serverlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,7 +35,6 @@ public class ReviewShowList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		String urlDB = getServletContext().getInitParameter("DBurl");
         String userDB = getServletContext().getInitParameter("DBuser");
         String passDB = getServletContext().getInitParameter("DBpass");
@@ -44,10 +44,18 @@ public class ReviewShowList extends HttpServlet {
 		ReviewDAO rDao = new ReviewDAO(urlDB,userDB,passDB,prop);
 		List<ReviewDTO> reviews = rDao.getAll();
 		EspectaculoDAO eDao = new EspectaculoDAO(urlDB,userDB,passDB,prop);
+		HashMap<ReviewDTO, String> reviewList = new HashMap<ReviewDTO,String>(); 
 		// Iterator over all reviews to get id and name of spectacle
+		PrintWriter out = response.getWriter();
 		for (ReviewDTO ReviewIterator: reviews) {
-			out.println("<a href=ShowReview?r="+ReviewIterator.getId()+">"+eDao.getById(ReviewIterator.getEspectacle()).getTitulo()+"</a>");
+			String titulo = eDao.getById(ReviewIterator.getEspectacle()).getTitulo();
+			reviewList.put(ReviewIterator, titulo);
 		}
+		
+		// Set the map inside the request
+		request.setAttribute("reviews", reviewList);
+		//Make the forward to View
+		request.getRequestDispatcher("mvc/view/reviewList.jsp").forward(request, response);
 		
 	}
 
