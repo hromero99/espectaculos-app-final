@@ -51,8 +51,7 @@ public class EspectaculoDAO implements IDAO<EspectaculoDTO>{
     @Override
     public ArrayList<EspectaculoDTO> getAll() {
         ArrayList<EspectaculoDTO> espectaulos = new ArrayList<EspectaculoDTO>();
-        DBConnection dbCon = new DBConnection();
-        Connection con = dbCon.getConnection();
+        Connection con = this.DbConnection.getConnection();
         try{
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(this.query.getSqlQuery("allEspectaculos"));

@@ -165,7 +165,7 @@ public class EspectaculoDTO {
      * @return the string
      */
     public String toCsv(){
-        return  String.format("%s,%s,%s,%d\n",getTitulo(),getDescripcion(),getCategoria(),getLocalidades());
+        return  String.format("%d,%s,%s,%s,%d",getId(),getTitulo(),getDescripcion(),getCategoria(),getLocalidades());
     }
 
     /**

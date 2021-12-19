@@ -177,7 +177,7 @@ public class UserDTO {
      */
     public String toCsv(){
     	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-        return String.format("%s,%s,%s,%s,%b,%s\n", this.name,this.surnames,this.nick,this.email,this.administrator,dateFormat.format(this.creationDate));
+        return String.format("%s,%s,%s,%s,%b,%s,%s", this.name,this.surnames,this.nick,this.email,this.administrator,this.password,dateFormat.format(this.creationDate));
     }
 
     /**

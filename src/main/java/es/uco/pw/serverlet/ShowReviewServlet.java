@@ -54,6 +54,7 @@ public class ShowReviewServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		out.println(review.getText());
+		
 	}
 
 	/**

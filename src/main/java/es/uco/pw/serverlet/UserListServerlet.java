@@ -1,18 +1,16 @@
 package es.uco.pw.serverlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.annotation.security.RolesAllowed;
 import es.uco.pw.business.dto.UserDTO;
 import es.uco.pw.data.dao.userDAO;
-import java.util.HashMap;
 
 /**
  * Servlet implementation class UserListServerlet
@@ -36,6 +34,7 @@ public class UserListServerlet extends HttpServlet {
 		
 		// This function is only for administrator user
 		// TODO: To check
+		List<String> UsersInformation = new ArrayList<String>();
 		
 		response.setContentType("text/html");
         String urlDB = getServletContext().getInitParameter("DBurl");
@@ -49,14 +48,14 @@ public class UserListServerlet extends HttpServlet {
         userDAO uDao = new userDAO(urlDB,userDB,passDB,prop);
         List<UserDTO> users = uDao.getAll();
         // The user variable has the plain user, instead need to get the last login date
-        // We need to create a hashmap to pass alse the last logging date
+        // We need to create a hashMap to pass also the last logging date
         
-        HashMap<UserDTO,String> userList = new HashMap<UserDTO,String>();
         for (UserDTO it: users) {
-        	userList.put(it, uDao.getLastLog(it.getId()));
+        	UsersInformation.add(it.toCsv() + ","+uDao.getLastLog(it.getId()));
+
         }
         //TODO: Replace with the html final table
-        request.setAttribute("usersList", userList);   
+        request.setAttribute("usersList", UsersInformation);   
         request.getRequestDispatcher("view/admin/usersListView.jsp").forward(request, response);
 	}
 

@@ -1,6 +1,9 @@
 package es.uco.pw.display.javabean;
 
+import javax.annotation.security.DeclareRoles;
 
+
+@DeclareRoles("user")
 public class CustomerBean implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;

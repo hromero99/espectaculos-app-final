@@ -115,6 +115,10 @@ public class userDAO implements IDAO<UserDTO> {
         UserDTO user = new UserDTO(objectToSave);
         DBConnection DBCon = new DBConnection(this.url, this.user, this.password);
         Connection con = DBCon.getConnection();
+        UserDTO userCheck = this.searchUserByEmail(user.getEmail());
+        if (userCheck != null) {
+        	return -2;
+        }
         try {
         	java.util.Date current = new java.util.Date();
         	PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("insertUser"));

@@ -3,6 +3,7 @@ package es.uco.pw.serverlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import es.uco.pw.display.javabean.CustomerBean;
 /**
  * Servlet implementation class ReviewPublish
  */
-@WebServlet(name="ReviewPublish",urlPatterns="/reviewPublish")
+@WebServlet(name="ReviewPublish",urlPatterns="/ReviewPublish")
 public class ReviewPublish extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,6 +38,7 @@ public class ReviewPublish extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 	response.setContentType("text/html");
+		 	
 			String urlDB = getServletContext().getInitParameter("DBurl");
 	        String userDB = getServletContext().getInitParameter("DBuser");
 	        String passDB = getServletContext().getInitParameter("DBpass");
@@ -53,15 +55,11 @@ public class ReviewPublish extends HttpServlet {
 	        }
 	        else {
 	        	// The espectaculos list contains all the espectaculos con pases celebrados con anterioridad
-        		out.println("<form action='reviewPublish' method='POST' id=\"reviewForm\">");
-        		out.println("<select id=\"especaculo\" name=\"espectaculo\">");
+        		List<String> espectaculosInformation = new ArrayList<String>();
 	        	for (EspectaculoDTO espectaculoIterator: espectaculos) {
-	        		out.println("<option value="+espectaculoIterator.getId()+">"+espectaculoIterator.getTitulo()+"</option>");	        		
+	        		espectaculosInformation.add(espectaculoIterator.toCsv());
 	        	}
-	        	out.println("</select>");
-	        	out.println("<input type=\"submit\"/>");
-	        	out.println("</form>");
-	        	out.println("<textarea form=\"reviewPublish\" name=\"review_text\">Insert Text</textarea>");
+	        	request.getRequestDispatcher("/view/user/reviewPublish.jsp").forward(request, response);
 	        }
 	        
 	}

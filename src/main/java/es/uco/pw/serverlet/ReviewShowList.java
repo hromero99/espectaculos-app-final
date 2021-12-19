@@ -35,10 +35,6 @@ public class ReviewShowList extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 * 
-	 * For this function need to pass a lot of parameters and make multiple queries to database
-	 * the best option is to return a list of Strings formed with all the review information
-	 * inside, then split that string (using some delimiter like ,) and show in table format
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -56,6 +52,8 @@ public class ReviewShowList extends HttpServlet {
 		
 		if (request.getParameter("e") == null) {
 			//TODO: Manage error
+			
+			
 		}
 		else {
 			int id = Integer.parseInt(request.getParameter("e"));
