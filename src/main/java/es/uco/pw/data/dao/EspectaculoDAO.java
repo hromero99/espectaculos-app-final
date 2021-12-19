@@ -100,15 +100,14 @@ public class EspectaculoDAO implements IDAO<EspectaculoDTO>{
 
     public EspectaculoDTO getByTitle(String title) {
         EspectaculoDTO espec = null;
-        DBConnection dbCon = new DBConnection();
-        Connection con = dbCon.getConnection();
+        Connection con = this.DbConnection.getConnection();
         try {
             PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("searchEspectaculoTitle"));
             stmnt.setString(1,title);
             ResultSet rs = stmnt.executeQuery();
             if (rs.next()){
                 espec = this.getById(rs.getInt("id"));
-                dbCon.closeConnection();
+                this.DbConnection.closeConnection();
 
             }
 
@@ -121,12 +120,27 @@ public class EspectaculoDAO implements IDAO<EspectaculoDTO>{
 
     @Override
     public int create(String objectToSave) {
-        return 0;
+    	Connection con = this.DbConnection.getConnection();
+        try {
+        	EspectaculoDTO espectaculo = new EspectaculoDTO(objectToSave);
+            PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("createEspectaculo"));
+            stmnt.setString(1,espectaculo.getTitulo());
+            stmnt.setString(2,espectaculo.getDescripcion());
+            stmnt.setString(3,espectaculo.getCategoria());
+            stmnt.setInt(4,espectaculo.getLocalidades());
+            stmnt.executeUpdate();
+            this.DbConnection.closeConnection();
+            return this.getByTitle(espectaculo.getTitulo()).getId();
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+            return -1;
+            //e.printStackTrace();
+        }
     }
 
     public int create(EspectaculoDTO objectToSave) {
-        DBConnection dbCon = new DBConnection();
-        Connection con = dbCon.getConnection();
+        Connection con = this.DbConnection.getConnection();
         try {
             PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("createEspectaculo"));
             stmnt.setString(1,objectToSave.getTitulo());
@@ -134,7 +148,7 @@ public class EspectaculoDAO implements IDAO<EspectaculoDTO>{
             stmnt.setString(3,objectToSave.getCategoria());
             stmnt.setInt(4,objectToSave.getLocalidades());
             stmnt.executeUpdate();
-            dbCon.closeConnection();
+            this.DbConnection.closeConnection();
             return this.getByTitle(objectToSave.getTitulo()).getId();
         }
         catch (SQLException e){
