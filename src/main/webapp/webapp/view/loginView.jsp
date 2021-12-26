@@ -23,15 +23,23 @@
 
                 <!-- now we ask for data and we POST it. We send it to ../controller/loginController.jsp for now -->
 			<form method="post" action="login">
-                    <label for="email">Email: </label>
-                    <input type="email" name="email" value="i72roloh@uco.es" placeholder="Email"></br>
-
-                    <label for="password">Password: </label>
-                    <input type="password" name="password" value="password" placeholder="Password"></br>
-
-                    <!-- send button -->
-                    <input type="submit" value="Submit">
-                </form>
+                 <h1>Login Form</h1>
+                <div class="formcontainer">
+                <hr/>
+                <div class="container">
+                  <label for="uname"><strong>Username</strong></label>
+                  <input type="text" placeholder="Enter Username" name="email" required>
+                  <label for="psw"><strong>Password</strong></label>
+                  <input type="password" placeholder="Enter Password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+                <div class="container" style="background-color: #eee">
+                  <label style="padding-left: 15px">
+                    <input type="checkbox"  checked="checked" name="remember"> Remember me
+                  </label>
+                  <span class="psw"><a href="#"> Forgot password?</a></span>
+                </div>
+             </form>
             <%
         %>
     </body>

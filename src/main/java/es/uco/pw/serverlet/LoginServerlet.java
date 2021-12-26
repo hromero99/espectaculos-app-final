@@ -36,9 +36,7 @@ public class LoginServerlet extends HttpServlet {
 		// Need to check if user is logged to redirect
 		HttpSession session = request.getSession();
 		
-		RequestDispatcher vHeader = request.getRequestDispatcher("/includes/header.html");
 		RequestDispatcher view = request.getRequestDispatcher("/login.html");
-		vHeader.include(request, response);
 		view.include(request, response);
 	}
 

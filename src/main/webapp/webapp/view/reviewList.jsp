@@ -2,13 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="es.uco.pw.business.dto.ReviewDTO,java.util.List" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+
+<%@include file="/includes/header.jsp"%>
+
 	<table>
 	
 		<tbody>
@@ -26,5 +22,4 @@
 		%>
 		</tbody>
 	</table>
-</body>
-</html>
+<%@include file="/includes/footer.jsp"%>
