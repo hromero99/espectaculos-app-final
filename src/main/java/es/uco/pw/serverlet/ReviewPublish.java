@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,21 +47,38 @@ public class ReviewPublish extends HttpServlet {
 	        java.util.Properties prop = new java.util.Properties();
 	        prop.load(getServletContext().getResourceAsStream(file));
 	        EspectaculoDAO eDao = new EspectaculoDAO(urlDB,userDB,passDB,prop);
-	        List<EspectaculoDTO> espectaculos = eDao.getEspectaculosCelerbated();
 			PrintWriter out = response.getWriter();
-
-	        if (espectaculos.size() == 0) {
-	        	// Control when is empty
-	        	out.println("No hay espectaculos celebrados");
-	        }
-	        else {
-	        	// The espectaculos list contains all the espectaculos con pases celebrados con anterioridad
-        		List<String> espectaculosInformation = new ArrayList<String>();
-	        	for (EspectaculoDTO espectaculoIterator: espectaculos) {
-	        		espectaculosInformation.add(espectaculoIterator.toCsv());
+			// Check if parameter is passed to servlet in order to get just one espectaculo
+			String Eid = request.getParameter("e");
+			if (Eid != null) {
+		        List<EspectaculoDTO> espectaculos_raw = eDao.getEspectaculosCelerbated();
+				List<String> espectaculosInformation = new ArrayList<String>();
+	        	int espectaculoId = Integer.parseInt(Eid);
+				for (EspectaculoDTO espectaculoIterator: espectaculos_raw) {
+	        		System.out.println(espectaculoIterator.getId());
+					if (espectaculoIterator.getId() == espectaculoId && !espectaculosInformation.contains(espectaculoIterator.toCsv())){
+	        			espectaculosInformation.add(espectaculoIterator.toCsv());
+	        		}
 	        	}
+	        	request.setAttribute("esp", espectaculosInformation);
 	        	request.getRequestDispatcher("/view/user/reviewPublish.jsp").forward(request, response);
-	        }
+			}else {
+				List<EspectaculoDTO> espectaculos = eDao.getEspectaculosCelerbated();
+				if (espectaculos.size() == 0) {
+			        	// Control when is empty
+			        	out.println("No hay espectaculos celebrados");
+			        }
+			        else {
+			        	// The espectaculos list contains all the espectaculos con pases celebrados con anterioridad
+		        		List<String> espectaculosInformation = new ArrayList<String>();
+			        	for (EspectaculoDTO espectaculoIterator: espectaculos) {
+			        		espectaculosInformation.add(espectaculoIterator.toCsv());
+			        	}
+			        	request.setAttribute("esp", espectaculosInformation);
+			        	request.getRequestDispatcher("/view/user/reviewPublish.jsp").forward(request, response);
+			        }
+			}
+	       
 	        
 	}
 
@@ -79,7 +97,7 @@ public class ReviewPublish extends HttpServlet {
 		
 		// The value of espectaculo is a Id to avoid to repeat queries to database
 		int espectaculo_id = Integer.parseInt(request.getParameter("espectaculo"));
-		String review_text = request.getParameter("review");
+		String review_text = request.getParameter("review_text");
 		
 		// As well as the form information need the user logged to create the Review Object, this can be found using the CustomerBean created in logging process
 		
@@ -93,14 +111,13 @@ public class ReviewPublish extends HttpServlet {
 		// Once the information of form is catch need to create a ReviewDao object to create the review
 		ReviewDAO rDao = new ReviewDAO(urlDB,userDB,passDB,prop);
 		// Use the information to create string of review
-		rDao.create(String.format("%d,%d,%s,%d",espectaculo_id,0,review_text,bean.getId()));
+		int Rid=rDao.create(String.format("%d,%d,%s,%d",espectaculo_id,0,review_text,bean.getId()));
 		
 		//TODO: the idea to redirect here is to show the review formated
 		
-		PrintWriter out = response.getWriter();
-		out.println(espectaculo_id);
-		out.println(review_text);
 		
+		RequestDispatcher disp = request.getRequestDispatcher("/ShowReview?r="+Rid);
+		disp.forward(request,response);
 	}
 
 }

@@ -53,6 +53,7 @@ public class ShowReviewServlet extends HttpServlet {
 			RequestDispatcher view = request.getRequestDispatcher("errorPage.jsp");
 			view.forward(request, response);
 		}
+		out.println("xd");
 		out.println(review.getText());
 		
 	}

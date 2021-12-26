@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +53,9 @@ public class ReviewShowList extends HttpServlet {
 		
 		if (request.getParameter("e") == null) {
 			//TODO: Manage error
-			
+			request.setAttribute("exception", "Url invalida");
+			RequestDispatcher disp = request.getRequestDispatcher("error.jsp");
+			disp.forward(request, response);
 			
 		}
 		else {
@@ -67,7 +70,8 @@ public class ReviewShowList extends HttpServlet {
 				reviewData += it.getText();
 				reviewsInformation.add(reviewData);
 			}
-			
+			System.out.println("rShowList");
+			System.out.println(reviewsInformation);
 			// Set the map inside the request
 			request.setAttribute("reviews", reviewsInformation);
 			//Make the forward to View

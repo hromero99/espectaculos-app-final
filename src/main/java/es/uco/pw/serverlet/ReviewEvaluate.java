@@ -112,7 +112,8 @@ public class ReviewEvaluate extends HttpServlet {
         CustomerBean bean = (CustomerBean) session.getAttribute("customerBean");
         ReviewDAO rDAO = new ReviewDAO(urlDB,userDB,passDB,prop);
 		rDAO.evaluateReview(bean.getId(), points, review, espectacle);
-		// TODO: Redirect to next screen, ?????????
+		RequestDispatcher disp = request.getRequestDispatcher("/showList");
+		disp.forward(request, response);
 	}
 
 }

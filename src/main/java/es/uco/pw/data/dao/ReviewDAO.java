@@ -84,6 +84,12 @@ public class ReviewDAO implements IDAO<ReviewDTO> {
             stmnt.setInt(2,newReview.getEspectacle());
             stmnt.setString(3,newReview.getText());
             stmnt.executeUpdate();
+            // Return the current review created
+            for (ReviewDTO it: this.getReviewForUser(newReview.getCreator())) {
+            	if (it.getText().equals(newReview.getText()) && it.getEspectacle() == newReview.getEspectacle()) {
+            		return it.getId();
+            	}
+            }
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -129,8 +135,7 @@ public class ReviewDAO implements IDAO<ReviewDTO> {
     }
 
     public List<ReviewDTO> getReviewForUser(int id) {
-        DBConnection dbCon = new DBConnection();
-        Connection con = dbCon.getConnection();
+        Connection con = this.DBConnection.getConnection();
         List<ReviewDTO> reviews = new ArrayList<ReviewDTO>();
         try{
             PreparedStatement stmnt = con.prepareStatement(this.query.getSqlQuery("ReviewForUser"));
@@ -149,7 +154,7 @@ public class ReviewDAO implements IDAO<ReviewDTO> {
         catch (SQLException e){
             e.printStackTrace();
         }
-        dbCon.closeConnection();
+        this.DBConnection.closeConnection();
         return reviews;
     }
     public List<ReviewDTO> getReviewForEspectaculo(int espectaculoID){

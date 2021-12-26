@@ -9,7 +9,7 @@
 <title>Listado de usuarios</title>
 </head>
 <body>
-	<%@include file="/includes/header.html" %>
+	<%@include file="/includes/header.jsp" %>
 	<table>
 		<tbody>
 			<%
