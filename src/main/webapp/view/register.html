@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Registro</title>
+        <link rel="stylesheet" href="static/css/navbar.css">
+        <link rel="stylesheet" href="static/css/register.css">
+    </head>
+
+    <body>
+        <div class="backdrop"></div>
+        <div class="login-modal">
+            <h1 class="login-modal__title">Login</h1>
+            <div class="login-modal__login-form">
+                
+                <div class="login-modal__login-form__input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="login-modal__login-form__input">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+
+
+                <button type="submit" class="button">Log in</button>
+            </div>
+        </div>
+
+        <header class="main-header">
+
+            <div>
+                <button class="toggle-button">
+                    <span class="toggle-button__bar"></span>
+                    <span class="toggle-button__bar"></span>
+                    <span class="toggle-button__bar"></span>
+                </button>
+                <a href="index.html" class="main-header__brand">
+                  <img src="https://www.pngrepo.com/png/55653/180/theatre-masks.png" />
+                </a>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="main-nav__items">
+                    <li class="main-nav__item">
+                        <a type="loginButton" href="#">Login</a>
+                    </li>
+
+                    <li class="main-nav__item">
+                        <a href="./register.html">Register</a>
+                    </li>
+
+                    <li class="main-nav__item">
+                        <a href="#">Nav3</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="signup-page">
+                <h1 class="signup-title">Please fill in the following form</h1>
+                <form action="register" method="POST" class="signup-form">
+                
+                    <label for="first-name">First name</label>
+                    <input type="text" name="name"  id="first-name" required>
+                    <label for="last-name">Last name</label>
+                    <input type="text" name="surnames" id="last-name" required>
+                    <label for="nick">Nombre de usuario</label>
+                    <input type="text" name="nick" id="nick" required>
+                    <label for="email">E-Mail</label>
+                    <input type="email" name="email" id="email" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" required>
+                    <div class="signup-form__checkbox">
+                        <input type="checkbox" id="agree-terms" required>
+                        <label for="agree-terms">Agree to
+                            <a href="#">Terms & Conditions</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="button">Sign Up</button>
+                </form>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <nav>
+                <ul class="main-footer__links">
+                    <li class="main-footer__link">
+                        <a href="#">Support</a>
+                    </li>
+                    <li class="main-footer__link">
+                        <a href="#">Terms of Use</a>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+        <script src="static/js/shared.js"></script>
+
+
+</html>

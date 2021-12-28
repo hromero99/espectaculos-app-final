@@ -1,0 +1,96 @@
+.main{
+    grid-area: main;
+    background-image: url(https://images.unsplash.com/photo-1503095396549-807759245b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80);
+    background-attachment: fixed;
+    background-size:100%;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+}
+
+.signup-page{
+    width:30%;
+    margin: 5% auto auto auto;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5%;
+
+
+}
+
+.signup-title{
+    text-align: center;
+    font-size: 1.8rem;
+    color: black;
+}
+
+.signup-form{
+    display:grid;
+    grid-auto-rows:2rem;
+    grid-row-gap:0.5rem;
+    padding:1rem;
+    color:black;
+
+}
+
+.signup-form label {
+    font-weight:bold;
+    color:black;
+}
+
+.signup-form label,
+.signup-form input,
+.signup-form select {
+    display:block;
+    width:100%;
+    color:black;
+
+}
+
+
+
+.signup-form input[id*="terms"],
+.signup-form input[id*="terms"] + label {
+    vertical-align: middle;
+    width: auto;
+    display: inline-block;
+
+}
+
+
+.signup-form input:not([type="checkbox"]),
+.signup-form select {
+    padding: 0.2rem 0.5rem;
+    font: inherit;
+    border: 1px solid #ccc;
+    font-weight:bold;
+
+}
+
+.signup-form input:focus,
+.signup-form select:focus {
+
+    background: white;
+    outline: none;
+    border-color: #2ddf5c;
+    
+}
+
+.signup-form input[type="checkbox"] {
+    background: white;
+    height: 1rem;
+    width: 1rem;
+    appearance: none;
+    border: 1px solid #ccc;
+}
+
+.signup-form input[type="checkbox"]:checked {
+    border: #0e4f1f;
+    background: #2ddf5c;
+}
+
+
+
+
+
+
+

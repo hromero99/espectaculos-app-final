@@ -1,0 +1,22 @@
+.main{
+    grid-area: main;
+    background-image: url('https://images.unsplash.com/photo-1503095396549-807759245b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80');
+    background-attachment: fixed;
+    background-size:100%;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
