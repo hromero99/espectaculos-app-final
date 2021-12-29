@@ -1,25 +1,70 @@
 <!DOCTYPE html>
-<html>
 
+<html>
     <head>
         <meta charset="UTF-8">
-        <title>Log in</title>
+        <title>Dionysium</title>
+        <link rel="stylesheet" href="static/css/navbar.css">
+        <link rel="stylesheet" href="static/css/register.css">
     </head>
 
-    <body>			               
+    <body>
+        <div class="backdrop"></div>
+      
 
-                <!-- now we ask for data and we POST it. We send it to ../controller/loginController.jsp for now -->
-			<form method="post" action="login">
-                    <label for="email">Email: </label>
-                    <input type="email" name="email"  placeholder="Email">
+        <header class="main-header">
 
-                    <label for="password">Password: </label>
-                    <input type="password" name="password" placeholder="Password">
+            <div>
+                <button class="toggle-button">
+                    <span class="toggle-button__bar"></span>
+                    <span class="toggle-button__bar"></span>
+                    <span class="toggle-button__bar"></span>
+                </button>
+                <a href="index.html" class="main-header__brand">
+                    <img src="static/img/theatre-131979040865277936.png">
+                </a>
+            </div>
 
-                    <!-- send button -->
-                    <input type="submit" value="Submit">
-             </form>
-            
-    </body>
+            <nav class="main-nav">
+                <ul class="main-nav__items">
+                    <li class="main-nav__item">
+                        <a  href="/login">Login</a>
+                    </li>
+
+                    <li class="main-nav__item">
+                        <a href="/register">Register</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="signup-page">
+                <h1 class="signup-title">Login</h1>
+                <form action="login" class="signup-form"method="POST"> 
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit" class="button">Login</button>
+                </form>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <nav>
+                <ul class="main-footer__links">
+                    <li class="main-footer__link">
+                        <a href="#">Support</a>
+                    </li>
+                    <li class="main-footer__link">
+                        <a href="#">Terms of Use</a>
+                    </li>
+                </ul>
+            </nav>
+        </footer>
+        <script src="shared.js"></script>
+
 
 </html>

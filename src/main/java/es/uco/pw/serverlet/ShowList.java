@@ -18,7 +18,7 @@ import es.uco.pw.display.javabean.CustomerBean;
 /**
  * Servlet implementation class ListarEspectaculos
  */
-@WebServlet(name="showList",urlPatterns="/showList")
+@WebServlet(name="showList",urlPatterns="/show/list")
 public class ShowList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

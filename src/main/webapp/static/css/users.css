@@ -1,0 +1,37 @@
+.main{
+    grid-area: main;
+    background-image: url('kyle-head-p6rNTdAPbuk-unsplash.jpg');
+    background-attachment: fixed;
+    background-size:100%;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+}
+
+
+.list-users{
+    font-family: 'Courier New', Courier, monospace;
+    color:black;
+    width:80%;
+    height:75%;
+    margin: 5% auto auto auto;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.list-users__items{
+    list-style: none;
+    height:100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.list-users__items::-webkit-scrollbar{
+    display:none;
+}
+
+.list-users__item{
+    padding:0.1rem;
+    border-bottom: 2px red solid;
+    margin:1%;
+}

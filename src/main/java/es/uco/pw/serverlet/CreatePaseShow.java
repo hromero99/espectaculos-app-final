@@ -31,18 +31,17 @@ public class CreatePaseShow extends HttpServlet {
 		int Npases = -1;
 		if (tipo.equals("m")) {
 			Npases = 4 ;
+			request.getRequestDispatcher("/view/admin/createShowPassView.jsp?nPases="+Npases).forward(request,response);
 		}
 		else if (tipo.equals("p")) {
 			Npases = 1;
+			request.getRequestDispatcher("/view/admin/createPasePuntual.jsp?nPases="+Npases).forward(request,response);
 		}
 		else {
 			Npases = 2;
+			request.getRequestDispatcher("/view/admin/createShowPassView.jsp?nPases="+Npases).forward(request,response);
 		}
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(eId);
-		System.out.println(tipo);
-		System.out.println(Npases);
-		request.getRequestDispatcher("/view/admin/createShowPassView.jsp?nPases="+Npases).forward(request,response);
+
 	}
 
 	/**

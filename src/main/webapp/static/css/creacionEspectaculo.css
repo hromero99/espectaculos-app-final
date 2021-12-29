@@ -1,0 +1,31 @@
+.main{
+    grid-area: main;
+    background-image: url('kyle-head-p6rNTdAPbuk-unsplash.jpg');
+    background-attachment: fixed;
+    background-size:100%;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+}
+
+.puntual{
+    width:30%;
+    margin: 5% auto auto auto;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.puntual-form{
+    display:grid;
+    grid-auto-rows:2rem;
+    grid-row-gap:0.5rem;
+    padding:1rem;
+    color:black;
+    font-weight:bold;
+}
+
+.puntual-form__title{
+    padding-bottom:10%;
+    text-align: center;
+    color:black;
+    font-weight:bold;
+}

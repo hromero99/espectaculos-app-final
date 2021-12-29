@@ -1,0 +1,77 @@
+.main{
+    grid-area: main;
+    background-image: url('kyle-head-p6rNTdAPbuk-unsplash.jpg');
+    background-attachment: fixed;
+    background-size:100%;
+    width:100vw;
+    height:100vh;
+    position:absolute;
+}
+
+.multiple{
+    width:60%;
+    height:35rem;
+    border:2px solid black;
+    margin: 5% auto auto auto;
+    background: rgba(255, 255, 255, 0.8);
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "form table";
+}
+
+.multiple-form{
+    display:grid;
+    grid-area:form;
+    grid-auto-rows:2rem;
+    grid-row-gap:3rem;
+    padding: 10rem;
+    color:black;
+    font-weight:bold;
+    height:70%;
+    justify-content: center;
+    align-content: center;
+    top:0%;
+    position:top;
+    
+}
+
+.multiple-title{
+    height:100%;
+    width:100%;
+    padding-bottom:10%;
+    align-self: center;
+    color: black;
+    font-weight:bold;
+}
+
+.multiple-form__table{
+    display:grid;
+    grid-area:table;
+    color:black;
+    height:70%;
+    padding-top:10%;
+    font-size:12px;
+}
+
+.multiple-form__table__items{
+    list-style: none;
+    justify-content: center;
+    margin:0;
+
+}
+
+.multiple-form__table__items li {
+    border-bottom:2px solid red;
+
+}
+
+
+
+.multiple-form__table__item-date{
+    display:inline-block;
+    margin: 10% auto auto auto;
+}
+
+.multiple-form__table__item-cta{
+    margin-left: 30%;
+}

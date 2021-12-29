@@ -13,7 +13,7 @@ import es.uco.pw.data.dao.EspectaculoDAO;
 /**
  * Servlet implementation class CreateShowServlet
  */
-@WebServlet(name="CreateShow", urlPatterns="/CreateShow")
+@WebServlet(name="CreateShow", urlPatterns="/show/create")
 public class CreateShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +29,7 @@ public class CreateShowServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/view/admin/createShowView.html").forward(request,response);
+		request.getRequestDispatcher("/view/admin/createShowView.jsp").forward(request,response);
 	}
 
 	/**
